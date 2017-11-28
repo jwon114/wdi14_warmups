@@ -9,23 +9,15 @@ if (!checkWord) {
 
 function isPalindrome(word) {
 	word = word.replace(/ /g, '').replace(/[^a-zA-Z]/g, '').toLowerCase();
-	var palindrome = true;
 	var i = 0;
 
 	if (word){
-		for (var j = word.length - 1; j >= 0; j--) {
-			if (word[i] !== word[j]) {
-				palindrome = false;
-				break;
-			}
-
-			if (i >= j) {
-				break;
-			} else {
-				i++;
-			}
+		var reverse = word.split('').reverse().join('');
+		if (word === reverse) {
+			return true;
+		} else {
+			return false;
 		}
-		return palindrome;
 	} else {
 		alert("You didn't enter a word!");
 	}
