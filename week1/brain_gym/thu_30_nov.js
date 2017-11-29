@@ -16,23 +16,17 @@ var thatArray = ["Facebook Platform","Erlang Enthusiasts","Ex-Girlfriends",
 "Camp Counselors","Nature Blogs","World of Warcraft","Models","Family Guy Enthusiasts","The Army","Cheap Vodka","Tech Incubators","Star Trek Conventions","Presentation Tools","Small Businesses","Beer","Nightclub Lines","Semi-Active Volcanoes", "Sanctimonial Artifacts","Traveling Abroad","Your Mom","Billionaires","Happy Hours","Ugg Boots","The Homeless","Blacking Out","Red Wine","Happy Families","Social Outcasts",
 "Surgeons","Pounding Jagger Bombs","Textbooks","Coffee Shops","Baristas"];
 
+var firstChoice = thisArray[Math.floor((Math.random() * thisArray.length))];
+var secondChoice = thatArray[Math.floor((Math.random() * thatArray.length))];
+
+console.log(firstChoice + ' for ' + secondChoice);
+
 var finalArray = [];
 
 for (var run = 1; run < 6 ; run++) {
-
 	var choice1 = thisArray[Math.floor((Math.random() * thisArray.length))];
-	// console.log('random1', Math.floor((Math.random() * thisArray.length)));
-	// console.log('thisArray.length', thisArray.length)
-	// console.log('choice1', choice1);
-
 	var choice2 = thatArray[Math.floor((Math.random() * thatArray.length))];
-	// console.log('random2', Math.floor((Math.random() * thatArray.length)));
-	// console.log('thatArray.length', thatArray.length)
-	// console.log('choice2', choice2);
-
 	var finalChoice = run + '. ' + choice1 + ' for ' + choice2;
-	// console.log(choice1 + ' for ' + choice2);
-
 	finalArray.push(finalChoice);
 }
 
