@@ -9,7 +9,6 @@ if (!checkWord) {
 
 function isPalindrome(word) {
 	word = word.replace(/ /g, '').replace(/[^a-zA-Z]/g, '').toLowerCase();
-	var i = 0;
 
 	if (word){
 		var reverse = word.split('').reverse().join('');
