@@ -3,11 +3,13 @@
 var date = new Date();
 var currentYear = date.getFullYear();
 var firstYear = currentYear - 100;
-var lastLeapYear = 2016;
+// var lastLeapYear = 2016;
 var leapYears = [];
 
-for (var year = lastLeapYear; year >= firstYear; year-=4) {
-	leapYears.push(year);
+for (var year = firstYear; year <= currentYear; year++) {
+	if (((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 ===0)) {
+		leapYears.push(year);
+	}
 }
 
 console.log(leapYears);
