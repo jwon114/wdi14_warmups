@@ -3,7 +3,6 @@
 var date = new Date();
 var currentYear = date.getFullYear();
 var firstYear = currentYear - 100;
-// var lastLeapYear = 2016;
 var leapYears = [];
 
 for (var year = firstYear; year <= currentYear; year++) {
