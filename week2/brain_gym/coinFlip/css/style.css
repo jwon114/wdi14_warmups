@@ -1,0 +1,43 @@
+.scores {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.headsScoreContainer,
+.tailsScoreContainer {
+	/*border: 1px solid black;*/
+	font-size: 50px;
+}
+
+.headsScore,
+.tailsScore {
+	text-align: center;
+}
+
+.coinContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 300px;
+}
+
+img {
+	width: 300px;
+}
+
+.result {
+	height: 50px;
+	/*border: 1px solid black;*/
+	margin-bottom: 20px;
+	font-size: 30px;
+	text-align: center;
+}
+
+.reset_container {
+	text-align: center;
+}
+
+button {
+	font-size: 40px;
+}
