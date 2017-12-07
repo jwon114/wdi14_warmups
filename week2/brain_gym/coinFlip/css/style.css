@@ -4,25 +4,25 @@
 	width: 100%;
 }
 
-.headsScoreContainer,
-.tailsScoreContainer {
+.headsScore_container,
+.tailsScore_container {
 	/*border: 1px solid black;*/
 	font-size: 50px;
 }
 
-.headsScore,
-.tailsScore {
+.heads_score,
+.tails_score {
 	text-align: center;
 }
 
-.coinContainer {
+.coin_container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 300px;
 }
 
-img {
+.coin_container img {
 	width: 300px;
 }
 

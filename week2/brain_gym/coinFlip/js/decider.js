@@ -15,9 +15,9 @@
 var headsCount = 0;
 var tailsCount = 0;
 var winner = '';
-var coinImage = document.querySelector('img');
-var headsScore = document.querySelector('.headsScore');
-var tailsScore = document.querySelector('.tailsScore');
+var coinImage = document.querySelector('.coin_container img');
+var headsScore = document.querySelector('.heads_score');
+var tailsScore = document.querySelector('.tails_score');
 var resetButton = document.querySelector('.reset_container button')
 var result = document.querySelector('.result');
 
@@ -26,7 +26,6 @@ resetButton.addEventListener('click', resetScores);
 
 var coinFlip = function() {
 	var num = Math.random();
-	// console.log(num);
 	var outcome;
 	num >= 0.5 ? outcome = 'heads' : outcome = 'tails';
 	return outcome;
