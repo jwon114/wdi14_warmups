@@ -36,21 +36,21 @@ function clickCoin() {
 	var flip = coinFlip();
 	if (flip === 'heads') { 
 		headsCount++;
-		headsScore.innerHTML = String(headsCount);
+		headsScore.textContent = String(headsCount);
 	}
 
 	if (flip === 'tails') {
 		tailsCount++;
-		tailsScore.innerHTML = String(tailsCount);
+		tailsScore.textContent = String(tailsCount);
 	}
 
 	if (tailsCount === 5) {
-		result.innerHTML = 'WINNER WINNER CHICKEN DINNER! TAILS WINS';
+		result.textContent = 'WINNER WINNER CHICKEN DINNER! TAILS WINS';
 		coinImage.removeEventListener('click', clickCoin);
 	}
 
 	if (headsCount === 5) {
-		result.innerHTML = 'WINNER WINNER CHICKEN DINNER! HEADS WINS';
+		result.textContent = 'WINNER WINNER CHICKEN DINNER! HEADS WINS';
 		coinImage.removeEventListener('click', clickCoin);
 	}
 }
@@ -59,9 +59,9 @@ function resetScores() {
 	headsCount = 0;
 	tailsCount = 0;
 	winner = '';
-	headsScore.innerHTML = '0';
-	tailsScore.innerHTML = '0';
-	result.innerHTML = '';
+	headsScore.textContent = '0';
+	tailsScore.textContent = '0';
+	result.textContent = '';
 	coinImage.addEventListener('click', clickCoin);
 }
 
