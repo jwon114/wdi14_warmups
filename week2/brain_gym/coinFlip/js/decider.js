@@ -45,12 +45,12 @@ function clickCoin() {
 	}
 
 	if (tailsCount === 5) {
-		result.innerHTML = 'WINNER WINNER CHICKEN DINNER! TAILS WINNER';
+		result.innerHTML = 'WINNER WINNER CHICKEN DINNER! TAILS WINS';
 		coinImage.removeEventListener('click', clickCoin);
 	}
 
 	if (headsCount === 5) {
-		result.innerHTML = 'WINNER WINNER CHICKEN DINNER! HEADS WINNER';
+		result.innerHTML = 'WINNER WINNER CHICKEN DINNER! HEADS WINS';
 		coinImage.removeEventListener('click', clickCoin);
 	}
 }
