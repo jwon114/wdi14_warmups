@@ -20,9 +20,10 @@
 	justify-content: center;
 	align-items: center;
 	height: 300px;
+	/*border: 1px solid black;*/
 }
 
-.coin_container img {
+.coin_wrapper img {
 	width: 300px;
 }
 
@@ -41,3 +42,17 @@
 button {
 	font-size: 40px;
 }
+
+.coin_wrapper.flip {
+	-webkit-animation: flip 3s ease-out;
+}
+
+@keyframes flip {
+	from {
+		-webkit-transform: rotateY(0);
+	}
+	to {
+		-webkit-transform: rotateY(1800deg);
+	}
+}
+

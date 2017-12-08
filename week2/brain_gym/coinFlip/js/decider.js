@@ -15,43 +15,64 @@
 var headsCount = 0;
 var tailsCount = 0;
 var winner = '';
-var coinImage = document.querySelector('.coin_container img');
+var coinImage = document.querySelector('.coin_wrapper');
 var headsScore = document.querySelector('.heads_score');
 var tailsScore = document.querySelector('.tails_score');
 var resetButton = document.querySelector('.reset_container button')
 var result = document.querySelector('.result');
+var outcome;
 
-coinImage.addEventListener('click', clickCoin);
+coinImage.addEventListener('click', actionCoin);
 resetButton.addEventListener('click', resetScores);
 
-var coinFlip = function() {
-	var num = Math.random();
-	var outcome;
-	num >= 0.5 ? outcome = 'heads' : outcome = 'tails';
-	return outcome;
+var coinFlip = function(callback) {
+	coinImage.classList.add('flip');
+	coinImage.removeEventListener('click', actionCoin);
+	setTimeout(function() {
+		var num = Math.random();
+		if (num >= 0.5) {
+			outcome = 'heads';
+		} else {
+			outcome = 'tails';
+		}
+		if (callback) {
+			callback();
+		}
+		coinImage.classList.remove('flip');
+		if (headsCount !== 5 && tailsCount !== 5) {
+			coinImage.addEventListener('click', actionCoin);
+		}
+	}, 2500)
 }
 
-function clickCoin() {
+function actionCoin() {
+	coinFlip(checkResult)
+}
+
+function checkResult() {
 	console.log('coin clicked');
-	var flip = coinFlip();
-	if (flip === 'heads') { 
+	console.log('outcome', outcome);
+	
+	if (outcome === 'heads') { 
 		headsCount++;
 		headsScore.textContent = String(headsCount);
+		coinImage.innerHTML = '<img src="nz_dollar_heads.png" alt="">';
 	}
 
-	if (flip === 'tails') {
+	if (outcome === 'tails') {
 		tailsCount++;
 		tailsScore.textContent = String(tailsCount);
+		coinImage.innerHTML = '<img src="lotr_coin.png" alt="">';
 	}
 
 	if (tailsCount === 5) {
 		result.textContent = 'WINNER WINNER CHICKEN DINNER! TAILS WINS';
-		coinImage.removeEventListener('click', clickCoin);
+		coinImage.removeEventListener('click', actionCoin);
 	}
 
 	if (headsCount === 5) {
 		result.textContent = 'WINNER WINNER CHICKEN DINNER! HEADS WINS';
-		coinImage.removeEventListener('click', clickCoin);
+		coinImage.removeEventListener('click', actionCoin);
 	}
 }
 
@@ -62,6 +83,6 @@ function resetScores() {
 	headsScore.textContent = '0';
 	tailsScore.textContent = '0';
 	result.textContent = '';
-	coinImage.addEventListener('click', clickCoin);
+	coinImage.addEventListener('click', actionCoin);
 }
 
