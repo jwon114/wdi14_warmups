@@ -15,7 +15,7 @@
 var headsCount = 0;
 var tailsCount = 0;
 var winner = '';
-var coinImage = document.querySelector('.coin_wrapper');
+var coinImage = document.querySelector('#coin_container');
 var headsScore = document.querySelector('.heads_score');
 var tailsScore = document.querySelector('.tails_score');
 var resetButton = document.querySelector('.reset_container button')
@@ -25,44 +25,47 @@ var outcome;
 coinImage.addEventListener('click', actionCoin);
 resetButton.addEventListener('click', resetScores);
 
-var coinFlip = function(callback) {
-	coinImage.classList.add('flip');
-	coinImage.removeEventListener('click', actionCoin);
+function coinFlip() {
+	var num = Math.random();
+	// remove the class list to reset the coin back to heads facing
+	coinImage.classList = '';
+	// removing and adding the same class doesn't trigger the css animating because its too quick(?) need timeout
 	setTimeout(function() {
-		var num = Math.random();
 		if (num >= 0.5) {
+			coinImage.classList.add('flipHeads');
 			outcome = 'heads';
 		} else {
+			coinImage.classList.add('flipTails');
 			outcome = 'tails';
 		}
-		if (callback) {
-			callback();
-		}
-		coinImage.classList.remove('flip');
+		// remove event listener to prevent coin clicks while spinning
+		coinImage.removeEventListener('click', actionCoin);
+	}, 1)
+	
+	// set timeout to 3 seconds because its the duration of the css flip animation
+	setTimeout(function() {
+		checkResult();
 		if (headsCount !== 5 && tailsCount !== 5) {
 			coinImage.addEventListener('click', actionCoin);
 		}
-	}, 2700)
+	}, 3000)
+
 }
 
 function actionCoin() {
-	coinFlip(checkResult)
+	coinFlip();
 }
 
 function checkResult() {
-	console.log('coin clicked');
-	console.log('outcome', outcome);
 	
 	if (outcome === 'heads') { 
 		headsCount++;
 		headsScore.textContent = String(headsCount);
-		coinImage.innerHTML = '<img src="nz_dollar_heads.png" alt="">';
 	}
 
 	if (outcome === 'tails') {
 		tailsCount++;
 		tailsScore.textContent = String(tailsCount);
-		coinImage.innerHTML = '<img src="lotr_coin.png" alt="">';
 	}
 
 	if (tailsCount === 5) {

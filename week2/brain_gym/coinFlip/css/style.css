@@ -1,3 +1,9 @@
+h1 {
+	text-align: center;
+	font-size: 50px;
+	margin-bottom: 0;
+}
+
 .scores {
 	display: flex;
 	justify-content: space-around;
@@ -6,7 +12,6 @@
 
 .headsScore_container,
 .tailsScore_container {
-	/*border: 1px solid black;*/
 	font-size: 50px;
 }
 
@@ -15,21 +20,63 @@
 	text-align: center;
 }
 
-.coin_container {
+.coin_wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#coin_container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 300px;
-	/*border: 1px solid black;*/
+	width: 300px;
+	position: relative;
+	transition: -webkit-transform 1s ease-in;
+	-webkit-transform-style: preserve-3d;
 }
 
-.coin_wrapper img {
+#coin_container img {
 	width: 300px;
+	position: absolute;
+}
+
+/* Put the tails coin on the reverse side of the heads coin so they are back to back */
+.coin_tails {
+  	-webkit-transform: rotateY(-180deg);
+}
+
+#coin_container.flipHeads {
+	-webkit-animation: flipHeads 3s ease-out forwards;
+}
+
+#coin_container.flipTails {
+	-webkit-animation: flipTails 3s ease-out forwards;
+}
+
+/* Rotate the coin 10 times if heads */
+@keyframes flipHeads {
+	from {
+		-webkit-transform: rotateY(0);
+	}
+	to {
+		-webkit-transform: rotateY(1800deg);
+	}
+}
+
+/* Rotate the coin 11 times if tails */
+@keyframes flipTails {
+	from {
+		-webkit-transform: rotateY(0);
+	}
+	to {
+		-webkit-transform: rotateY(1980deg);
+	}
 }
 
 .result {
 	height: 50px;
-	/*border: 1px solid black;*/
 	margin-bottom: 20px;
 	font-size: 30px;
 	text-align: center;
@@ -43,15 +90,3 @@ button {
 	font-size: 40px;
 }
 
-.coin_wrapper.flip {
-	-webkit-animation: flip 3s ease-out;
-}
-
-@keyframes flip {
-	from {
-		-webkit-transform: rotateY(0);
-	}
-	to {
-		-webkit-transform: rotateY(1800deg);
-	}
-}
