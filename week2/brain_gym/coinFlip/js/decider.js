@@ -42,7 +42,7 @@ var coinFlip = function(callback) {
 		if (headsCount !== 5 && tailsCount !== 5) {
 			coinImage.addEventListener('click', actionCoin);
 		}
-	}, 2500)
+	}, 2700)
 }
 
 function actionCoin() {
