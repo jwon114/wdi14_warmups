@@ -52,7 +52,6 @@ def talk_to_daniel()
 			input_array.each do | letter |
 				if vowels.has_key?(letter)
 					letter = vowels[letter]
-					puts "this letter #{letter}"
 				end
 
 				if capital_letter
