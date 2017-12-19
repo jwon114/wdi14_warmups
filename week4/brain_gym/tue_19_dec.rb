@@ -25,7 +25,23 @@
 
 require	"pry"
 
-def talk_to_daniel()
+def talk_to_daniel
+
+	def shouting?(text) # method not function, has to be defind before we use it
+		if text.upcase == text && !text.empty?
+			return true
+		else
+			return false
+		end
+	end
+
+	def question?(text)
+		if text.strip.end_with? "?"
+			return true
+		else
+			return false
+		end
+	end
 
 	talking = true
 	
@@ -35,9 +51,9 @@ def talk_to_daniel()
 		user_input = gets.chomp
 
 		# if you ask him a question
-		if user_input.end_with? "?"
+		if question?(user_input)
 			puts "Sure"
-		elsif user_input == user_input.upcase && !user_input.empty?
+		elsif shouting?(user_input)
 			puts "Woah, chill out!"
 		elsif user_input.empty?
 			puts "Fine. Be that way!"
