@@ -37,11 +37,10 @@ def talk_to_daniel()
 		# if you ask him a question
 		if user_input.end_with? "?"
 			puts "Sure"
-		elsif user_input == user_input.upcase && user_input.length > 0
+		elsif user_input == user_input.upcase && !user_input.empty?
 			puts "Woah, chill out!"
-		elsif user_input.length == 0
+		elsif user_input.empty?
 			puts "Fine. Be that way!"
-			talking = false
 		elsif user_input.start_with? "Bro, "
 			# use a hash to store the vowels and their corresponding numbers
 			vowels = { "a" => "4", "e" => "3", "i" => "1", "o" => "0" }
