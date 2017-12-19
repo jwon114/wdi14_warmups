@@ -59,14 +59,14 @@ def talk_to_daniel
 			puts "Fine. Be that way!"
 		elsif user_input.start_with? "Bro, "
 			# use a hash to store the vowels and their corresponding numbers
-			vowels = { "a" => "4", "e" => "3", "i" => "1", "o" => "0" }
+			vowels = { :a => "4", :e => "3", :i => "1", :o => "0" }
 
 			input_array = user_input.downcase.split("")
 			output = ''
 			capital_letter = false
 			input_array.each do | letter |
-				if vowels.has_key?(letter)
-					letter = vowels[letter]
+				if vowels.has_key?(letter.to_sym)
+					letter = vowels[letter.to_sym]
 				end
 
 				if capital_letter
