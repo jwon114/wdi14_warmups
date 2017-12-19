@@ -97,17 +97,32 @@ var holyGrailMap = [
 ["A","V","A","A","A","S"]
 ];
 
+var holyGrailMap2 = [
+["v","v","V","v","S","S"],
+["v","v","V","v","S","S"],
+["v","v","V","v","S","S"],
+["v","v","V","v","S","S"],
+["v","v","G","G","S","S"],
+["v","v","H","v","S","S"],
+["v","v","V","v","S","S"],
+["A","V","A","A","A","S"]
+];
+
+
 var newTreasureFinder = function(array, treasure) {
 	var treasureCount = 0;
 	for (var x = 0; x < array.length; x++) {
-		if (array[x].includes(treasure)) {
-			var xPos = x;
-			treasureCount++;
+		for (var y = 0; y < array[x].length; y++) {
+			if (array[x][y] === treasure) {
+				var xPos = x;
+				var yPos = y;
+				treasureCount++;
+				if (treasureCount > 1) { break }
+			}
 		}
 	}
 
 	if (treasureCount === 1) {
-		var yPos = array[xPos].indexOf(treasure);
 		return [xPos, yPos]; 
 	} else {
 		return 'that doesnt belong in a museum!';
@@ -118,4 +133,5 @@ console.log(newTreasureFinder(holyGrailMap, "G")); // should return [4, 2];
 console.log(newTreasureFinder(holyGrailMap, "H")); // should return [5, 2];
 console.log(newTreasureFinder(holyGrailMap, "H")); // should return [5, 2];
 console.log(newTreasureFinder(holyGrailMap, "V")); // should return 'that doesnt belong in a museum!';
+console.log(newTreasureFinder(holyGrailMap2, "G")); // should return [4, 2];
 
