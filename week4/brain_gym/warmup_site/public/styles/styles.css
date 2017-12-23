@@ -1,0 +1,42 @@
+h1 {
+	color: red;
+}
+
+nav {
+	display: flex;
+	justify-content: flex-end;
+	border: 1px solid black;
+}
+
+nav ul {
+	display: flex;
+	justify-content: space-evenly;
+	width: 25%;
+	padding: 0;
+}
+
+nav ul li {
+	list-style: none;
+}
+
+nav ul li a {
+	text-decoration: none;
+}
+
+.img_grid {
+	width: 80%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.img_grid li {
+	display: flex;
+	justify-content: space-around;
+}
+
+.img_grid li img {
+	height: 200px;
+	width: 200px;
+}

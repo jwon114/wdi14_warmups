@@ -42,11 +42,12 @@ h1 {
 	position: absolute;
 }
 
-/* Put the tails coin on the reverse side of the heads coin so they are back to back */
+/* rotate the tails coin image so it is back to back with the heads image */
 .coin_tails {
   	-webkit-transform: rotateY(-180deg);
 }
 
+/* the coin container is rotating when class flipHeads or flipTails is added */
 #coin_container.flipHeads {
 	-webkit-animation: flipHeads 3s ease-out forwards;
 }
