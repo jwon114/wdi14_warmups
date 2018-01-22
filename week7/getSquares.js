@@ -20,20 +20,11 @@
 // # What's that all about?!?!?!
 
 function getSquare(array) {
-	output = [];
-	array.forEach(function(element) {
-		if (Math.sqrt(element) % 1 === 0) {
-			output.push(element);
-		}
-	})
 
-	output = output.filter(function(element, index, array) {
-		return index === array.indexOf(element);
-	})
+	var output = array.filter((element, index, array) => {
+		return (Math.sqrt(element) % 1 === 0) && (index === array.indexOf(element))
+	}).sort((a,b) => a - b)
 
-	output.sort(function(a,b) {
-		return a - b;
-	})
 	return output;
 }
 
