@@ -20,11 +20,11 @@
 # Extension 2
 # Now do it with js.
 
-require "Time"
 require "pry"
 
 class Coffee
 	attr_reader :name
+	attr_reader :collected
 
 	def initialize(drink, sugar, size, name)
 		@drink = drink
@@ -50,7 +50,13 @@ class Coffee
 	end
 
 	def collected
+		@collected = true
+	end
 
+	def list
+		if !@collected
+			return "#{@name}'s #{@drink}, #{@size}, #{@sugar}"
+		end
 	end
 end
 
@@ -77,21 +83,27 @@ while order do
 	name = gets.chomp
 	coffee_orders[name] = Coffee.new(coffee, sugar, size, name)
 
-	while command != "order"
-		print "Check if an order is ready (name.ready?), see the list of orders (list), order again (order)"
-		command = gets.chomp
-		# binding.pry
-		if command.downcase.include? ".ready?"
-			# binding.pry
+	done_ordering = false
+
+	while !done_ordering
+		puts "Check if an order is ready (name.ready?), see the list of orders (list), collect cofee (name.collected), order again (order)"
+		puts
+		command = gets.chomp.downcase
+		if command.include? ".ready?"
 			order_name = command.gsub(".ready?", "")
 			puts coffee_orders[order_name].ready?
-			binding.pry
-		elsif command.downcase == "list" 
+		elsif command.include? ".collected"
+			order_name = command.gsub(".collected", "")
+			coffee_orders[order_name].collected
+			puts "#{order_name}'s coffee collected"
+		elsif command == "list" 
 			coffee_orders.each do |name, order|
-				puts order.to_s
-				# binding.pry
+				puts order.list
 			end
+		elsif command == "order"
+			done_ordering = true
 		end
+		puts
 	end
 	# check if order is ready
 	# hold a list of coffees on order
