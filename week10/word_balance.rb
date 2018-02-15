@@ -30,96 +30,54 @@
 
 require 'pry'
 
+def calculate_weights(scores_array, balance_index)
+	# create an array of weighted scores * distance from centre
+	weights = scores_array.each_with_index.map do |score, index|
+		score * (index - balance_index)
+	end
+	return {
+		balanced: weights.sum == 0,
+		per_side: weights[0..balance_index].sum.abs,
+		index: balance_index
+	}
+end
+
+def create_alphabet
+	alphabet = ('A'..'Z').to_a
+	letter_score = {}
+	alphabet.each_with_index do |letter, index|
+		letter_score[letter] = index + 1
+	end
+	return letter_score
+end
+
 def word_balance(word)
 
-	letters = {
-		'A' => 1,
-		'B' => 2,
-		'C' => 3,
-		'D' => 4,
-		'E' => 5,
-		'F' => 6,
-		'G' => 7,
-		'H' => 8,
-		'I' => 9,
-		'J' => 10,
-		'K' => 11,
-		'L' => 12,
-		'M' => 13,
-		'N' => 14,
-		'O' => 15,
-		'P' => 16,
-		'Q' => 17,
-		'R' => 18,
-		'S' => 19,
-		'T' => 20,
-		'U' => 21,
-		'V' => 22,
-		'W' => 23,
-		'X' => 24,
-		'Y' => 25,
-		'Z' => 26
-	}
-
-	def check_balance(left_sum, right_sum)
-		if left_sum == right_sum
-			return true
-		else
-			return false
-		end
-	end
-
-	word_array = word.upcase.split('')
-	balanced = false
-	centre_index = 0
+	# create object with scores per letter
+	letter_score = create_alphabet
 	
-	while(!balanced && centre_index < word_array.length - 1)
-		if centre_index > 0 && centre_index < word_array.length - 1
-			left_array = word_array.slice(0, centre_index)
-			right_array = word_array.slice(centre_index + 1, word_array.length)
-			left_sum = 0
-			right_sum = 0
+	# convert word array into array of weights
+	scores_array = word.upcase.split('').map { |letter| letter_score[letter] }
 
-			left_array.each_with_index do |letter, index|
-				left_sum += letters[letter] * (centre_index - (index + 1))
-				# puts "left sum in loop #{left_sum}"
-			end
-
-			# binding.pry
-			right_array.each_with_index do |letter, index|
-				right_sum += letters[letter] * ((index + 1) - centre_index)
-			end
-
-			balanced = check_balance(left_sum, right_sum)
-			puts "left array #{left_array}"
-			# puts "left sum #{left_sum}"
-			puts "right array #{right_array}"
-			puts "right sum #{right_sum}"
-			puts "centre #{word_array[centre_index]}"
-			puts "word length #{word_array.length}"
-		end
-		centre_index += 1 if !balanced
+	# loop through weights array and sum weights * distance to centre
+	result = {}
+	scores_array.each_index do |balance_index|
+		result = calculate_weights(scores_array, balance_index)
+		break if result[:balanced]
 	end
 
-	if balanced
-		first_part = word_array.slice(0, centre_index).join('')
-		centre = word_array.slice(centre_index, 1).join('')
-		last_part = word_array.slice(centre_index + 1, word_array.length).join('')
-		sum = left_sum
-		result = "#{first_part} #{centre} #{last_part} - #{sum}"
-		puts result
-		# binding.pry
+	if result[:balanced]
+		puts "#{word[0..result[:index] - 1]} #{word[result[:index]]} #{word[result[:index] + 1..word.length]} - #{result[:per_side]}"
 	else
-		puts 'not balanced'
+		puts "#{word} DOES NOT BALANCE"
 	end
-
 
 end
 
-# word_balance('STEAD')
+word_balance('STEAD')
 word_balance('CONSUBSTANTIATION')
-# word_balance('WRONGHEADED')
-# word_balance('UNINTELLIGIBILITY')
-
+word_balance('WRONGHEADED')
+word_balance('UNINTELLIGIBILITY')
+word_balance('SUPERGLUE')
 
 
