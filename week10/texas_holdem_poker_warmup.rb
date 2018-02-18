@@ -27,36 +27,112 @@
 
 require 'pry'
 
-numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Jack', 'Queen', 'King', 'Ace']
-cards = {
-	'Spades' => numbers,
-	'Hearts' => numbers,
-	'Diamonds' => numbers,
-	'Clubs' => numbers
-}
-
-begin
-	puts "Enter the number of players between 2 to 8"
-	number_of_players = gets.chomp().to_i
-end until number_of_players >= 2 && number_of_players <= 8
-
-# binding.pry
-players = []
-for player_number in 1..number_of_players do 
-	player = {}
-	player[:id] = player_number
-
-	player[:cards] = []
-	for card in 1..2 do
-		suit = cards.keys.sample
-		selected_card = cards[suit].sample
-		player[:cards] << selected_card + ' ' + suit
-		cards[suit].delete(selected_card)
+def create_deck
+	numbers = ['Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace']
+	suits = ['Spades', 'Hearts', 'Diamonds', 'Clubs']
+	deck = []
+	suits.each do |suit|
+		numbers.each do |number|
+			deck << "#{number} #{suit}"
+		end 
 	end
-	players << player
-	# binding.pry
+	return deck
 end
-puts players
+
+def ask_number_of_players
+	begin
+		puts "Enter the number of players between 2 to 8"
+		number_of_players = gets.chomp().to_i
+	end until number_of_players >= 2 && number_of_players <= 8
+	return number_of_players
+end
+
+def deal_cards(number_of_players, deck)
+	players = []
+	for player_number in 1..number_of_players do 
+		player = {}
+		player[:id] = player_number
+		player[:cards] = []
+		for card in 1..2 do
+			selected_card = deck.sample
+			player[:cards] << selected_card
+			deck.delete(selected_card)
+		end
+		players << player
+	end
+	return [players, deck]
+end
+
+def display_player_hands(players)
+	players.each do |player|
+		if player[:id] == 1
+			puts "Your Hand: #{player[:cards].join(', ')}" 
+		else
+			puts "CPU #{player[:id]} Hand: #{player[:cards].join(', ')}" 
+		end
+	end
+end
+
+def burn_card(deck)
+	selected_card = deck.sample
+	deck.delete(selected_card)
+	puts "#{selected_card} burned"
+	return deck
+end
+
+def flop(deck)
+	board = []
+	for card in 1..3 do
+		selected_card = deck.sample
+		board << selected_card
+		deck.delete(selected_card)		
+	end
+	return [board, deck]
+end
+
+def display_flop(board)
+	puts "Flop: #{board.join(', ')}"
+end
+
+def turn(board, deck)
+	turn_card = deck.sample
+	board << turn_card
+	deck.delete(turn_card)
+	return [board, deck, turn_card]
+end
+
+def display_turn(turn_card)
+	puts "Turn: #{turn_card}"
+end
+
+def river(board, deck)
+	river_card = deck.sample
+	board << river_card
+	deck.delete(river_card)
+	return [board, deck, river_card]
+end
+
+def display_river(river_card)
+	puts "River: #{river_card}"
+end
+
+def texas_holdem_poker
+	number_of_players = ask_number_of_players
+	deck = create_deck
+	players, deck = deal_cards(number_of_players, deck)
+	display_player_hands(players)
+	deck = burn_card(deck)
+	board, deck = flop(deck)
+	display_flop(board)
+	deck = burn_card(deck)
+	board, deck, turn_card = turn(board, deck)
+	display_turn(turn_card)
+	deck = burn_card(deck)
+	board, deck, river_card = river(board, deck)
+	display_river(river_card)
+end
+
+texas_holdem_poker
 
 
 

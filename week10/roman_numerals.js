@@ -26,82 +26,44 @@
 
 function convertToRoman(number) {
 
-	ones = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
-	tens = ['X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC']
-	hundreds = ['C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM']
-	thousands = ['M', 'MM', 'MMM']
+	var ones = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX']
+	var tens = ['', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC']
+	var hundreds = ['', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM']
+	var thousands = ['', 'M', 'MM', 'MMM']
 
-	number.split('')
+	var number_arr = number.toString().split('');
+	var romanNumerals = '';
+	while (number_arr.length > 0) {
+		digit = number_arr[0];
+		switch(number_arr.length) {
+			case 4:
+				romanNumerals += (thousands[digit]);
+				break;
+			case 3:
+				romanNumerals += (hundreds[digit]);
+				break;
+			case 2:
+				romanNumerals += (tens[digit]);
+				break;
+			case 1:
+				romanNumerals += (ones[digit]);
+				break;
+			default:
+				break;
+		}
+		number_arr.shift();
+	}
 
-	// var roman_numerals = {
-	// 	1: "I",
-	// 	2: "II",
-	// 	3: "III",
-	// 	4: "IV",
-	// 	5: "V",
-	// 	6: "VI",
-	// 	7: "VII",
-	// 	8: "VIII",
-	// 	9: "IX",
-	// 	10: "X",
-	// 	50: "L",
-	// 	100: "C",
-	// 	500: "D",
-	// 	1000: "M"
-	// }
-
-	// if (number in roman_numerals) { return roman_numerals[number] }
-
-	// var output = '';
-	// var roman;
-	// var dividedNumber;
-	// var floatingNumber;
-	// var num = number;
-	// do {
-	// 	switch(true) {
-	// 		case (num > 0 && num < 10):
-	// 			output += roman_numerals[num];
-	// 			num = 1;
-	// 			break;
-	// 		case (num > 10 && num < 50):
-	// 			dividedNumber = Number((num / 10).toString().split('.')[0]);
-				
-
-	// 			for (var i = 1; i <= dividedNumber; i++) {
-	// 				output += roman_numerals[10];
-	// 			}
-
-	// 			num = Number((num / 10).toString().split('.')[1]);
-	// 			break;
-	// 		case (num > 50 && num < 100):
-	// 			dividedNumber = Number((num / 50).toString().split('.')[0]);
-		
-	// 			for (var i = 1; i <= dividedNumber; i++) {
-	// 				output += roman_numerals[50];
-	// 			}
-
-	// 			num = Number((num / 10).toString().split('.')[1]);
-	// 		case (num > 100 && num < 500):
-	// 			dividedNumber = Number((num / 100).toString().split('.')[0]);
-		
-	// 			for (var i = 1; i <= dividedNumber; i++) {
-	// 				output += roman_numerals[50];
-	// 			}
-
-	// 			num = Number((num / 10).toString().split('.')[1]);
-	// 		default:
-	// 	}
-	// } while (num !== 1)
-
-	// return output
+	return romanNumerals
 }
 
-// console.log(convertToRoman(1));
+console.log(convertToRoman(1));
 console.log(convertToRoman(25));
 console.log(convertToRoman(24));
 console.log(convertToRoman(55));
 console.log(convertToRoman(19));
 console.log(convertToRoman(29));
+console.log(convertToRoman(3000));
 
 
 
